@@ -1,21 +1,18 @@
-Write-Host "Running npm install to ensure depenedencies are up-to-date"
+Write-Host "Running npm install to ensure dependencies are up-to-date..."
 npm install
 
-Write-Host "Running backend...."
-Start-Job -ScriptBlock {
-    npm run dev
-}
+Write-Host "Running backend..."
+npm run dev
 
-Write-Host "Running frontend"
+Write-Host "Running frontend..."
 Start-Job -ScriptBlock {
-    npm run start:frontend
+    npm run watch:frontend
 }
-
 
 Write-Host "All processes started. Press Enter to stop..."
 Read-Host
 
-Write-Host "Stopping all processes..."
+Write-Host "Stopping all background jobs..."
 Get-Job | Stop-Job
 Remove-Job *
 
