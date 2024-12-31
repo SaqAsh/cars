@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "ESNext",
+    "module": "ESNext",        // For browser-compatible ES modules
+    "moduleResolution": "Node", // Use standard Node-style resolution
     "rootDir": "./",
     "outDir": "./dist",
     "strict": true
