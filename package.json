@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:backend": "tsc -p src/",
+    "build:frontend": "tsc -p public/",
+    "build": "npm run build:backend && npm run build:frontend",
+    "start": "node dist/index.js",
+    "dev": "nodemon --watch src --exec ts-node src/index.ts",
+    "watch:frontend": "tsc -w -p public/tsconfig.json",
+    "start:frontend": "live-server public"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +20,9 @@
   },
   "devDependencies": {
     "@types/ws": "^8.5.13",
+    "live-server": "^1.2.2",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   }
 }
