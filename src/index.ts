@@ -6,11 +6,6 @@ import path from 'path'
 import { Server, Socket } from "socket.io";
 const io = new Server(server);
 
-class ServerHandler{
-
-
-
-}
 
 app.use(express.static(path.join(__dirname, '../public')));
 app.get('/', (req, res) => {
@@ -38,9 +33,7 @@ function ManageConnections(): void {
     function HandleConnections(): void {
         if (users.length === 2) {
             for ( let i = 0; i < 2; i++){
-
                 if(users[i].rooms.has('waiting')) users[i].rooms.delete('waiting'); // in the case that the user was in the waiting room before they joined we are gonna remove the waiting stage
-
                 users[i].join("game");
                 users[i].emit('waitingLobby', { message: 'Welcome to the game!' });
                 console.log(users[i].rooms);
