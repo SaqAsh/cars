@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
     "target": "ES6",           
-    "module": "ESNext",        
+    "module": "CommonJS",        
     "rootDir": "./",           
     "outDir": "../dist",       
     "strict": true,            
     "moduleResolution": "node",
     "esModuleInterop": true,   
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   },
-  "include": ["**/*.ts"]
+  
+  "include": [" **/*.ts", "index.ts"]
 }
