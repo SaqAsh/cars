@@ -11,7 +11,6 @@ body {
     overflow-y: hidden;
     overflow-x: hidden;
 }
-
 /* Title Styling */
 h1 {
     text-align: center;
@@ -19,23 +18,24 @@ h1 {
     font-size: 2rem;
     margin: 20px 0;
 }
-
 .drag-strip {
     width: 100%; 
     height: 45%; 
     background: linear-gradient(90deg, black 0 20%, white 0 30%, black 0 50%);
     border: 5px solid black;
-    
+    display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: start;
     padding: 20px;
 }
-
 .dotted-line {
     border-bottom: 3px dotted white;
     width: 100%;
     margin: 10px 0;
 }
-
-
+.drag-strip img {
+    width: 250px;
+    height: 200px;
+    margin: 0 10px; 
+}

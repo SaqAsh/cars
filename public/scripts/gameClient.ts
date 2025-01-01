@@ -1,0 +1,1 @@
+// registers the keypress and tells the backend that there is a keypress for the selected person
