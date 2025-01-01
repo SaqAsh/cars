@@ -25,7 +25,7 @@ h1 {
     height: 45%; 
     background: linear-gradient(90deg, black 0 20%, white 0 30%, black 0 50%);
     border: 5px solid black;
-    display: flex;
+    
     flex-direction: column;
     justify-content: flex-start;
     align-items: start;
@@ -39,8 +39,3 @@ h1 {
 }
 
 
-.drag-strip img {
-    width: 250px;
-    height: 200px;
-    margin: 0 10px; 
-}
