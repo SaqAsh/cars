@@ -4,6 +4,9 @@
 //getting the dom elements that we need to actually show the game queue
 const waitingRoom: HTMLElement | null = document.getElementById('waiting-area');
 const game: HTMLElement | null = document.getElementById('game');
+winningState!.style.display = 'none';
+losingState!.style.display = 'none';
+
 ///////////////////////////////////////////////////////////////////////////////////
 var socket = io();
 function showGame(waitingRoom?: HTMLElement, game?: HTMLElement): void {
