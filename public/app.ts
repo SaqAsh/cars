@@ -23,20 +23,6 @@ document.addEventListener('keydown', keyDownHandler);
     let offsetX_car1: number;
     let offsetX_car2: number;
 
-// function keyDownHandler(e: KeyboardEvent) {
-//     if (e.repeat) return;
-//     if (e.key.toLowerCase() === 'w' && parseInt(car1.style.left ||'0',10) < (screen.width-230)) {
-//         offsetX_car1 = parseInt(car1.style.left || '0', 10); 
-//         car1.style.left = `${offsetX_car1+ 20}px`; 
-//         // socket.emit('the x value of the car is', car1.style.left);
-//     }
-//     if (e.key.toLowerCase() === 'm'&& parseInt(car2.style.left ||'0',10) < (screen.width-230)){
-//         offsetX_car2 = parseInt(car2.style.left || '0', 10);
-//         car2.style.left = `${offsetX_car2 + 20}px`; 
-//         // socket.emit('the x value of the car is', car2.style.left);
-//     }
-// }
-
     //handle winner and loser state
 
     function HandleWinningState(){
@@ -53,7 +39,7 @@ document.addEventListener('keydown', keyDownHandler);
         winningState!.style.display ='none';
         losingState!.style.display = 'block';
     }
-
+    //this is the other user telling me that I lost cuz of his position
     socket.on("car1Position", (args:any)=>{
         if(parseInt(car1!.style.left || '0', 10) >=(screen.width -230)) HandleLosingState();
         car1!.style.left = args;
