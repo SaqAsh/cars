@@ -1,5 +1,3 @@
-// This file is going to be the one that handles the dom manipulation for the waiting room. What will happen is that when the user is put in the waiting room
-// It will only show the waiting screen which is literally just nothing lol
 export class WaitingRoomManager {
     public socket: any;
     public waitingRoom: HTMLElement | null;

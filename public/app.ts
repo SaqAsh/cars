@@ -1,6 +1,5 @@
-// all of this stuff will be abstracted to the backend
-import { WaitingRoomManager } from "./scripts/lobbyManager";
-import { GameStateManager } from "./scripts/gameState";
+import { WaitingRoomManager } from "./scripts/lobbyManager.ts";
+import { GameStateManager } from "./scripts/gameState.ts";
 
 var socket = io();
 const waitingRoomManager = new WaitingRoomManager(
@@ -14,7 +13,6 @@ const gameStateManager = new GameStateManager(
     "car1",
     "car2"
 );
-
 document.addEventListener("keydown", keyDownHandler);
 
 gameStateManager.winningState!.style.display = "none";

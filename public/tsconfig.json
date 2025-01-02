@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "ESNext",        // For browser-compatible ES modules
-    "moduleResolution": "Node", // Use standard Node-style resolution
+    "module": "ESNext",
+    "moduleResolution": "bundler", 
     "rootDir": "./",
     "outDir": "./dist",
-    "strict": true
+    "strict": true,
+    "noEmit": true, 
+    "allowImportingTsExtensions": true
   },
-  "include": ["./app.ts", "./scripts/**/*.ts"],
+  "include": ["./app.ts", "./scripts/**/*.ts"]
 }
