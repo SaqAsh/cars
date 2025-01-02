@@ -21,24 +21,23 @@
                 </div>
                 <div class="dotted-line"></div>
             </div>
-            <script src="./dist/app.js" type="module"></script>
+            <div id="waiting-area" class="waiting-area">
+                <h1>
+                    Waiting for the game..., get a cup of coffee and relax
+                </h1>
+            </div>
+            <div id ="winning-state">
+                <h1>
+                    U are a winner!
+                </h1>
+            </div>
+            <div id="losing-state">
+                <h1>
+                    U are a loser!
+                </h1>
+            </div>
             <script src="/socket.io/socket.io.js"></script>
-            
-        <div id="waiting-area" class="waiting-area">
-            <h1>
-                Waiting for the game..., get a cup of coffee and relax
-            </h1>
-        </div>
-        <div id ="winning-state">
-            <h1>
-                U are a winner!
-            </h1>
-        </div>
-        <div id="losing-state">
-            <h1>
-                U are a loser!
-            </h1>
-        </div>
-        <script src="./dist/scripts/lobbyManager.js"></script>
+            <script type="module" src="./dist/app.js"></script>
+            <script type="module" src="./dist/scripts/lobbyManager.js"></script>
     </body>
 </html>
