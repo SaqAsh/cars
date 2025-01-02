@@ -16,6 +16,7 @@ function ManageConnections(): void {
     const users: Socket[] = [];
 
     io.on('connection', (socket: Socket) => {
+        HandleMovement(socket);
         users.push(socket); 
         console.log(`User connected: ${socket.id}. Total: ${users.length}`);
 
@@ -45,6 +46,28 @@ function ManageConnections(): void {
                 console.log(users[i].rooms);
             }
         }
+    }
+
+    function HandleMovement(socket: Socket): void{
+
+
+        socket.on("keypress", (arg : any)=>{
+            if(Object.keys(arg)[0] === users[0].id){
+                socket.emit("car1", 20);
+            }
+            if(Object.keys(arg)[0] === users[1].id){
+                socket.emit("car2", 20);
+            }
+            // console.log(arg);
+        });
+
+        socket.on("car1Position", (arg:any) =>{
+            users[1].emit("car1Position", arg);
+        })
+
+        socket.on("car2Position", (arg:any) =>{
+            users[0].emit("car2Position", arg);
+        })
     }
 }
 
