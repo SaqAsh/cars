@@ -4,16 +4,21 @@
 document.addEventListener('keydown', keyDownHandler);
 
 
-    const car1: any = document.getElementById("car1");
-    const car2: any = document.getElementById("car2");
+    const car1: HTMLElement | null = document.getElementById("car1");
+    const car2: HTMLElement | null= document.getElementById("car2");
 
-    car1.style.position = 'absolute';
-    car1.style.left = '80px';
-    car1.style.top = `${screen.height/2}px`;
+    const winningState: HTMLElement | null = document.getElementById('winning-state')
+    const losingState: HTMLElement | null = document.getElementById('losing-state');
 
-    car2.style.position = 'absolute';
-    car2.style.left = '80px';
-    car2.style.top = `${screen.height/3}px`;
+    winningState!.style.display = 'none';
+    losingState!.style.display = 'none';
+    car1!.style.position = 'absolute';
+    car1!.style.left = '80px';
+    car1!.style.top = `${screen.height/2}px`;
+
+    car2!.style.position = 'absolute';
+    car2!.style.left = '80px';
+    car2!.style.top = `${screen.height/3}px`;
 
     let offsetX_car1: number;
     let offsetX_car2: number;
@@ -31,26 +36,46 @@ document.addEventListener('keydown', keyDownHandler);
 //         // socket.emit('the x value of the car is', car2.style.left);
 //     }
 // }
+
+    //handle winner and loser state
+
+    function HandleWinningState(){
+        car1!.style.display = 'none';
+        car2!.style.display = 'none';
+        game!.style.display = 'none';
+        winningState!.style.display ='block';
+        losingState!.style.display = 'none';
+    }
+    function HandleLosingState() {
+        car1!.style.display = 'none';
+        car2!.style.display = 'none';
+        game!.style.display = 'none';
+        winningState!.style.display ='none';
+        losingState!.style.display = 'block';
+    }
+
     socket.on("car1Position", (args:any)=>{
-        console.log(args);
-        car1.style.left = args;
+        if(parseInt(car1!.style.left || '0', 10) >=(screen.width -230)) HandleLosingState();
+        car1!.style.left = args;
     });
     
     socket.on("car2Position", (args:any)=>{
-        console.log(args);
-        car2.style.left = args;
+        if(parseInt(car2!.style.left || '0', 10) >=(screen.width -230)) HandleLosingState();
+        car2!.style.left = args;
     });
 
     socket.on("car1", (arg: any) =>{
-        offsetX_car1 = parseInt(car1.style.left || '0', 10);
-        car1.style.left = `${offsetX_car1 + arg}px`;
-        socket.emit("car1Position", car1.style.left);
+        offsetX_car1 = parseInt(car1!.style.left || '0', 10);
+        car1!.style.left = `${offsetX_car1 + arg}px`;
+        if(parseInt(car1!.style.left || '0', 10) >=(screen.width -230)) HandleWinningState();
+        socket.emit("car1Position", car1!.style.left);
     });
 
     socket.on("car2", (arg: any)=>{
-        offsetX_car2 = parseInt(car2.style.left || '0', 10);
-        car2.style.left = `${offsetX_car2 + arg}px`;
-        socket.emit("car2Position", car2.style.left);
+        offsetX_car2 = parseInt(car2!.style.left || '0', 10);
+        car2!.style.left = `${offsetX_car2 + arg}px`;
+        if(parseInt(car2!.style.left || '0', 10) >=(screen.width -230)) HandleWinningState();
+        socket.emit("car2Position", car2!.style.left);
     })
 
 function keyDownHandler(e: KeyboardEvent){

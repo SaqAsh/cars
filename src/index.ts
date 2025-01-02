@@ -50,7 +50,6 @@ function ManageConnections(): void {
 
     function HandleMovement(socket: Socket): void{
 
-
         socket.on("keypress", (arg : any)=>{
             if(Object.keys(arg)[0] === users[0].id){
                 socket.emit("car1", 20);
@@ -58,7 +57,6 @@ function ManageConnections(): void {
             if(Object.keys(arg)[0] === users[1].id){
                 socket.emit("car2", 20);
             }
-            // console.log(arg);
         });
 
         socket.on("car1Position", (arg:any) =>{
