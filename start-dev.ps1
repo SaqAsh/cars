@@ -2,11 +2,13 @@ Write-Host "Running npm install to ensure dependencies are up-to-date..."
 npm install
 
 Write-Host "Running backend..."
-npm run dev
+Start-Job -ScriptBlock {
+    Start-Process powershell -ArgumentList "-NoExit", "-Command", "npm run dev"
+}
 
 Write-Host "Running frontend..."
 Start-Job -ScriptBlock {
-    npm run watch:frontend
+    Start-Process powershell -ArgumentList "-NoExit", "-Command", "npm run watch:frontend" 
 }
 
 Write-Host "All processes started. Press Enter to stop..."
