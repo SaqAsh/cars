@@ -1,5 +1,5 @@
-import { WaitingRoomManager } from "./scripts/lobbyManager.ts";
-import { GameStateManager } from "./scripts/gameState.ts";
+import { WaitingRoomManager } from "./scripts/lobbyManager";
+import { GameStateManager } from "./scripts/gameState";
 
 var socket = io();
 const waitingRoomManager = new WaitingRoomManager(

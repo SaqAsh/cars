@@ -2,12 +2,10 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "ESNext",
-    "moduleResolution": "bundler", 
+    "moduleResolution": "node",
     "rootDir": "./",
     "outDir": "./dist",
-    "strict": true,
-    "noEmit": true, 
-    "allowImportingTsExtensions": true
+    "strict": true
   },
   "include": ["./app.ts", "./scripts/**/*.ts"]
 }
