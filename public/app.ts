@@ -21,7 +21,7 @@ const racingCars = gameStateManager.racingCars;
 for (let i = 0; i < racingCars.length; i++) {
     racingCars[i].style.position = "absolute";
     racingCars[i].style.left = "80px";
-    racingCars[i].style.top = `${(screen.height / (i + 1)) * 1.5}px`;
+    racingCars[i].style.top = `${(screen.height / (i + 1)) * 0.5}px`;
 }
 
 let offsetXRacingCars = [];
