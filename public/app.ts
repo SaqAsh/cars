@@ -19,7 +19,7 @@ gameStateManager.winningState!.style.display = "none";
 gameStateManager.losingState!.style.display = "none";
 gameStateManager.racingCar1!.style.position = "absolute";
 gameStateManager.racingCar1!.style.left = "80px";
-gameStateManager.racingCar1!.style.top = `${screen.height / 2}px`;
+gameStateManager.racingCar1!.style.top = `${screen.height / 1.5}px`;
 
 gameStateManager.racingCar2!.style.position = "absolute";
 gameStateManager.racingCar2!.style.left = "80px";
