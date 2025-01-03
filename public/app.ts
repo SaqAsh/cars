@@ -1,6 +1,8 @@
 import { WaitingRoomManager } from "./scripts/lobbyManager";
 import { GameStateManager } from "./scripts/gameState";
 var socket = io();
+
+const racingCarIDs = ["car1", "car2"]; // we are gonna expand this when we can make an unlimited number of cars based off of sockets joining
 const waitingRoomManager = new WaitingRoomManager(
     socket,
     "waiting-area",
@@ -9,88 +11,55 @@ const waitingRoomManager = new WaitingRoomManager(
 const gameStateManager = new GameStateManager(
     "winning-state",
     "losing-state",
-    "car1",
-    "car2"
+    racingCarIDs
 );
 document.addEventListener("keydown", keyDownHandler);
 gameStateManager.winningState!.style.display = "none";
 gameStateManager.losingState!.style.display = "none";
-gameStateManager.racingCar1!.style.position = "absolute";
-gameStateManager.racingCar1!.style.left = "80px";
-gameStateManager.racingCar1!.style.top = `${screen.height / 1.5}px`;
 
-gameStateManager.racingCar2!.style.position = "absolute";
-gameStateManager.racingCar2!.style.left = "80px";
-gameStateManager.racingCar2!.style.top = `${screen.height / 3}px`;
+const racingCars = gameStateManager.racingCars;
+for (let i = 0; i < racingCars.length; i++) {
+    racingCars[i].style.position = "absolute";
+    racingCars[i].style.left = "80px";
+    racingCars[i].style.top = `${(screen.height / (i + 1)) * 1.5}px`;
+}
 
-let offsetX_racingCar1: number;
-let offsetX_racingCar2: number;
+let offsetXRacingCars = [];
 
-socket.on("car1Position", (args: any) => {
-    if (
-        parseInt(gameStateManager.racingCar1!.style.left || "0", 10) >=
-        screen.width - 230
-    ) {
-        gameStateManager.HandleLosingState(
-            waitingRoomManager.game!,
-            waitingRoomManager.waitingRoom!
+for (let i = 0; i < racingCars.length; i++) {
+    socket.on(`car${i + 1}Position`, (args: any) => {
+        if (
+            parseInt(racingCars[i]!.style.left || "0", 10) >=
+            screen.width - 230
+        ) {
+            gameStateManager.HandleLosingState(
+                waitingRoomManager.game!,
+                waitingRoomManager.waitingRoom!
+            );
+        }
+        racingCars[i].style.left = args;
+    });
+}
+
+for (let i = 0; i < racingCars.length; i++) {
+    socket.on(`car${i + 1}`, (args: any) => {
+        offsetXRacingCars[i] = parseInt(racingCars[i]!.style.left || "0", 10);
+        racingCars[i]!.style.left = `${offsetXRacingCars[i] + args}px`;
+        if (
+            parseInt(racingCars[i]!.style.left || "0", 10) >=
+            screen.width - 230
+        ) {
+            gameStateManager.HandleWinningState(
+                waitingRoomManager.game!,
+                waitingRoomManager.waitingRoom!
+            );
+        }
+        socket.emit(
+            `car${i + 1}Position`,
+            gameStateManager.racingCars[i]!.style.left
         );
-    }
-    gameStateManager.racingCar1!.style.left = args;
-});
-
-socket.on("car2Position", (args: any) => {
-    if (
-        parseInt(gameStateManager.racingCar2!.style.left || "0", 10) >=
-        screen.width - 230
-    ) {
-        gameStateManager.HandleLosingState(
-            waitingRoomManager.game!,
-            waitingRoomManager.waitingRoom!
-        );
-    }
-    gameStateManager.racingCar2!.style.left = args;
-});
-
-socket.on("car1", (arg: any) => {
-    offsetX_racingCar1 = parseInt(
-        gameStateManager.racingCar1!.style.left || "0",
-        10
-    );
-    gameStateManager.racingCar1!.style.left = `${offsetX_racingCar1 + arg}px`;
-    if (
-        parseInt(gameStateManager.racingCar1!.style.left || "0", 10) >=
-        screen.width - 230
-    )
-        gameStateManager.HandleWinningState(
-            waitingRoomManager.game!,
-            waitingRoomManager.waitingRoom!
-        );
-    socket.emit(
-        "car1Position",
-        gameStateManager.racingCar1!.style.left
-    );
-});
-
-socket.on("car2", (arg: any) => {
-    offsetX_racingCar2 = parseInt(
-        gameStateManager.racingCar2!.style.left || "0",
-        10
-    );
-    gameStateManager.racingCar2!.style.left = `${offsetX_racingCar2 + arg}px`;
-    if (
-        parseInt(gameStateManager.racingCar2!.style.left || "0", 10) >=
-        screen.width - 230
-    )
-        gameStateManager.HandleWinningState(
-            waitingRoomManager.game!,
-            waitingRoomManager.waitingRoom!
-        );
-    socket.emit(
-        "car2Position",
-        gameStateManager.racingCar2!.style.left
-    );
-});
+    });
+}
 
 function keyDownHandler(e: KeyboardEvent) {
     if (e.repeat) return;

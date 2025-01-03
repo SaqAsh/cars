@@ -1,27 +1,31 @@
 export class GameStateManager {
     public winningState: HTMLElement | null;
     public losingState: HTMLElement | null;
-    public racingCar1: HTMLElement | null;
-    public racingCar2: HTMLElement | null;
-
+    public racingCars: HTMLElement[];
     constructor(
         winningState: string,
         losingState: string,
-        racingCar1: string,
-        racingCar2: string
+        racingCarIds: string[] | null = []
     ) {
         this.winningState = document.getElementById(winningState);
         this.losingState = document.getElementById(losingState);
-        this.racingCar1 = document.getElementById(racingCar1);
-        this.racingCar2 = document.getElementById(racingCar2);
+        this.racingCars = [];
+        for(let i = 0; i < racingCarIds!.length; i++) {
+            const carElement = document.getElementById(racingCarIds![i]);
+            if (carElement) {
+                this.racingCars.push(carElement);
+            }
+        }
     }
 
     public HandleWinningState(
         game: HTMLElement,
         waitingRoom: HTMLElement
     ): void {
-        this.racingCar1!.style.display = "none";
-        this.racingCar2!.style.display = "none";
+
+        for(let i = 0; i < this.racingCars.length; i++) {
+            this.racingCars[i].style.display = "none";
+        }
         game!.style.display = "none";
         waitingRoom!.style.display = "none";
         this.winningState!.style.display = "block";
@@ -32,8 +36,9 @@ export class GameStateManager {
         game: HTMLElement,
         waitingRoom: HTMLElement
     ): void {
-        this.racingCar1!.style.display = "none";
-        this.racingCar2!.style.display = "none";
+        for(let i = 0; i < this.racingCars.length; i++) {
+            this.racingCars[i].style.display = "none";
+        }
         game!.style.display = "none";
         waitingRoom!.style.display = "none";
         this.winningState!.style.display = "none";
