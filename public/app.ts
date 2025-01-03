@@ -1,6 +1,5 @@
 import { WaitingRoomManager } from "./scripts/lobbyManager";
 import { GameStateManager } from "./scripts/gameState";
-
 var socket = io();
 const waitingRoomManager = new WaitingRoomManager(
     socket,
@@ -14,7 +13,6 @@ const gameStateManager = new GameStateManager(
     "car2"
 );
 document.addEventListener("keydown", keyDownHandler);
-
 gameStateManager.winningState!.style.display = "none";
 gameStateManager.losingState!.style.display = "none";
 gameStateManager.racingCar1!.style.position = "absolute";
@@ -28,7 +26,6 @@ gameStateManager.racingCar2!.style.top = `${screen.height / 3}px`;
 let offsetX_racingCar1: number;
 let offsetX_racingCar2: number;
 
-//this is the other user telling me that I lost cuz of his position
 socket.on("car1Position", (args: any) => {
     if (
         parseInt(gameStateManager.racingCar1!.style.left || "0", 10) >=
