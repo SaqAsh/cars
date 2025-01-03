@@ -18,6 +18,7 @@ gameStateManager.winningState!.style.display = "none";
 gameStateManager.losingState!.style.display = "none";
 
 const racingCars = gameStateManager.racingCars;
+
 for (let i = 0; i < racingCars.length; i++) {
     racingCars[i].style.position = "absolute";
     racingCars[i].style.left = "80px";
@@ -39,9 +40,6 @@ for (let i = 0; i < racingCars.length; i++) {
         }
         racingCars[i].style.left = args;
     });
-}
-
-for (let i = 0; i < racingCars.length; i++) {
     socket.on(`car${i + 1}`, (args: any) => {
         offsetXRacingCars[i] = parseInt(racingCars[i]!.style.left || "0", 10);
         racingCars[i]!.style.left = `${offsetXRacingCars[i] + args}px`;
