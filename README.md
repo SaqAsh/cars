@@ -1,5 +1,3 @@
-In order to play this game locally you needa do the following
+verse ur friends now!
 
-./start-dev.ps1
-
-instructions on non local development soon!
+https://cars-qb3j.onrender.com/
