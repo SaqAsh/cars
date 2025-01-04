@@ -5,7 +5,12 @@
     "moduleResolution": "node",
     "rootDir": "./",
     "outDir": "./dist",
-    "strict": true
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
   },
-  "include": ["./app.ts", "./scripts/**/*.ts"]
+  "include": ["./app.ts", "./scripts/**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

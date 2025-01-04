@@ -1,5 +1,5 @@
-import { WaitingRoomManager } from "./scripts/lobbyManager";
-import { GameStateManager } from "./scripts/gameState";
+import { WaitingRoomManager } from "./scripts/lobbyManager.js";
+import { GameStateManager } from "./scripts/gameState.js";
 var socket = io();
 
 const racingCarIDs = ["car1", "car2"]; // we are gonna expand this when we can make an unlimited number of cars based off of sockets joining
