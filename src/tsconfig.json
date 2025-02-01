@@ -11,5 +11,5 @@
     "skipLibCheck": true
   },
   
-  "include": [" **/*.ts", "index.ts"]
+  "include": ["**/*.ts", "index.ts", "./db/DBConnection.ts"]
 }
