@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  # Development service with hot reloading
+  cars-game-dev:
+    build:
+      context: .
+      target: development
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount source code for hot reloading
+      - ./src:/app/src
+      - ./public:/app/public
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+    environment:
+      - NODE_ENV=development
+      - SERVICE_NAME=Cars Racing Game (Development)
+    command: npm run dev
+    restart: unless-stopped
+    profiles:
+      - dev
+    labels:
+      - "description=Development server with hot reloading"
+      - "service=cars-game"
+
+  # Production service
+  cars-game-prod:
+    build:
+      context: .
+      target: production
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - SERVICE_NAME=Cars Racing Game (Production)
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    profiles:
+      - prod
+    labels:
+      - "description=Production server with health checks"
+      - "service=cars-game"
+
+  # Optional: Add a database service if needed later
+  # db:
+  #   image: postgres:15-alpine
+  #   environment:
+  #     POSTGRES_DB: cars_game
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   profiles:
+  #     - dev
+  #     - prod
+
+# volumes:
+#   postgres_data: 

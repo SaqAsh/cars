@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  # Development service with hot reloading
+  cars-game-dev:
+    build:
+      context: ..
+      target: development
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount source code for hot reloading
+      - ../src:/app/src
+      - ../public:/app/public
+      - ../package.json:/app/package.json
+      - ../package-lock.json:/app/package-lock.json
+    environment:
+      - NODE_ENV=development
+      - SERVICE_NAME=Cars Racing Game (Development)
+    command: npm run dev
+    restart: unless-stopped
+    labels:
+      - "description=Development server with hot reloading"
+      - "service=cars-game" 

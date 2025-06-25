@@ -13,9 +13,13 @@ const gameStateManager = new GameStateManager(
     "losing-state",
     racingCarIDs
 );
+
 document.addEventListener("keydown", keyDownHandler);
-gameStateManager.winningState!.style.display = "none";
-gameStateManager.losingState!.style.display = "none";
+
+if(gameStateManager.winningState){
+    gameStateManager.winningState.style.display = "none";
+    gameStateManager.losingState!.style.display = "none";
+}
 
 const racingCars = gameStateManager.racingCars;
 
@@ -28,7 +32,7 @@ for (let i = 0; i < racingCars.length; i++) {
 let offsetXRacingCars = [];
 
 for (let i = 0; i < racingCars.length; i++) {
-    socket.on(`car${i + 1}Position`, (args: any) => {
+    socket.on(`car${i + 1}Position`, (args: string ) => {
         if (
             parseInt(racingCars[i]!.style.left || "0", 10) >=
             screen.width - 230
@@ -42,7 +46,7 @@ for (let i = 0; i < racingCars.length; i++) {
     });
     socket.on(`car${i + 1}`, (args: any) => {
         offsetXRacingCars[i] = parseInt(racingCars[i]!.style.left || "0", 10);
-        racingCars[i]!.style.left = `${offsetXRacingCars[i] + args}px`;
+        racingCars[i].style.left = `${offsetXRacingCars[i] + args}px`;
         if (
             parseInt(racingCars[i]!.style.left || "0", 10) >=
             screen.width - 230
